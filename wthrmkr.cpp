@@ -40,12 +40,12 @@
 #include "tables.h"
 
 
-const char version_string[] = "WeatherMaker 1.3.4";
-const char copyright_string[] = "Copyright (C) 2002 Cynthia Higginbotham";
+const char version_string[] = "WeatherMaker 1.3.5";
+const char copyright_string[] = "Copyright (C) 2020 Cynthia Higginbotham";
 const char license_string[] = 
 "This program is free software; you can redistribute it and/or modify\n"
 "it under the terms of the GNU General Public License as published by\n"
-"the Free Software Foundation; either version 2 of the License, or\n"
+"the Free Software Foundation; either version 3 of the License, or\n"
 "(at your option) any later version.\n\n"
 "This program is distributed in the hope that it will be useful,\n"
 "but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
@@ -81,34 +81,34 @@ int main (int argc, char *argv[] )
     /* initialize random number generator */
         srand( (unsigned int) time(NULL) );
 
-	// point daily report object at lunar data, if needed.
-	if (Here.show_moon) {
-	   Weather.number_moons = Here.pCal->number_moons;
-	   Weather.moons = Here.pCal->moons;
-	   Weather.p_jdate = &Here.curr_jdate;
-	}
+        // point daily report object at lunar data, if needed.
+        if (Here.show_moon) {
+           Weather.number_moons = Here.pCal->number_moons;
+           Weather.moons = Here.pCal->moons;
+           Weather.p_jdate = &Here.curr_jdate;
+        }
         IntermediateReport WorkArea(&Here, &Weather);
         mo = Here.month[0];
-	s = Here.season;
+        s = Here.season;
         do {
-	   if (Here.month[0] != mo) {
+           if (Here.month[0] != mo) {
                 WorkArea.ChangeMonth();
-	   }
-	   if (Here.season != s) {
-	       WorkArea.ChangeSeason();
-		if (Here.IsDump())
-		   Here.Dump(0);
-	   }
-	       
+           }
+           if (Here.season != s) {
+               WorkArea.ChangeSeason();
+                if (Here.IsDump())
+                   Here.Dump(0);
+           }
+               
             mo = Here.month[0];
-	    s = Here.season;
+            s = Here.season;
             WorkArea.GenerateWeather();
             Here.PrintDate();
             Weather.Print( !Here.IsDump());
         } while ( Here.IterateDate() ); /* enddo */
-	WorkArea.PrintStatus();
+        WorkArea.PrintStatus();
    } /* endif */
-	return 0;
+        return 0;
 } /* end main */
 
 
@@ -189,7 +189,7 @@ short diceroll( short num, short type, short plus, short *dice_array)
 
     for (i=0,result=0,pdice=dice_array; i<num; i++, pdice++) {
         // *pdice = (short) (((double) type * rand())/RAND_MAX) + 1;
-	*pdice = (short) ((long) rand() % (long) type) +1;
+        *pdice = (short) ((long) rand() % (long) type) +1;
         result += (*pdice);
     }
     return (result + plus);
@@ -200,7 +200,7 @@ short simple_dieroll( short num, short type, short plus)
     register int result,i;
 
     for (i=0,result=0; i<num; i++) {
-	result += (short) ((long) rand() % (long) type)+1;
+        result += (short) ((long) rand() % (long) type)+1;
     }
     return (result + plus);
 } /* end */
