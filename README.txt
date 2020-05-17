@@ -1,7 +1,7 @@
--- $Id: README.txt,v 1.6 2002/05/18 17:22:28 cyhiggin Exp $ --
+-- $Id$ --
 
-WeatherMaker 1.3.4
-Copyright (C) 2002 Cynthia Higginbotham
+WeatherMaker 1.3.5
+Copyright (C) 2020 Cynthia Higginbotham
 
 WeatherMaker is a command-line utility to generate weather reports for
 role-playing games set in Earth-like worlds. It is not meant to be
@@ -17,35 +17,27 @@ INSTALLING SOURCE & COMPILING
 -----------------------------
 Everybody:
 
-0. Download the latest source from my website. (See 
-   http://www.republicofnewhome.org/lair/games/games3.html for current 
-   version and changelog).
+0. Clone or download the latest source from GitHub 
+(https://github.com/Sinhika/WeatherMaker) 
 
 Linux/Unix:
 
-1. Un-tar in a working directory:
-   tar xvzf wthrmkr-1.3.4.tar.gz
+1. You will need GNU g++ or the equivalent installed.
 
-2. Change to your working directory and clean up any old object files
+2. Change to the working directory and clean up any old object files
    or executables: 
    make clean
 
-3. Generate dependencies:
-   make dep
-
 4. Build wthrmkr:
-   make wthrmkr
+   make 
 
 5. Copy the resulting wthrmkr executable to wherever you want it, like
    /usr/local/bin or /usr/games/bin.
 
-Currently, WeatherMaker should compile on any system with gcc and a
+Currently, WeatherMaker should compile on any system with g++ and a
 working implementation of libc/glibc, including all the header files
-(it requires getopt.h). I have only tested it on Linux 2.4 with glibc
-2.2. It is single-threaded, so it should compile fine on older systems.
-
-Optimized and stripped, wthrmkr weighs in at about 30 KB. Not bad in
-these days of bloatware, eh?
+(it requires getopt.h). I have tested it on Linux 4.15 and earlier with glibc.
+It is single-threaded, so it should compile fine on older systems.
 
 Windows/Cygwin:
 
@@ -56,68 +48,7 @@ I tested it using gcc 2.95.2-6 under Cygwin 19.1001.8.
 
 Windows/Cygwin-without-cygwin-DLL:
 
-If you want to generate a Windows executable using the Cygwin
-environment that does NOT use the Cygwin DLLs, do the following:
-
-1. Un-tar in a working directory:
-   tar xvzf wthrmkr-1.3.4.tar.gz
-
-2. Unzip wthrmkr_vs6.zip (described below) in your working directory.
-
-3. Change to your working directory and clean up any old object files
-   or executables: 
-   make -f Makefile.nocygwin clean
-
-4. Generate dependencies:
-   make -f Makefile.nocygwin dep
-
-5. Build wthrmkr.exe:
-   make -f Makefile.nocygwin wthrmkr.exe
-
-6. Copy the resulting wthrmkr.exe executable someplace convenient.
-
-Normally, you wouldn't bother doing this; if you are running the Cygwin
-environment, you have the Cygwin DLLs. I do this so I can distribute a
-legally-compiled 64K Windows executable without distributing a 600K 
-cygwin1.dll along with it.
-
-Windows/Visual Studio 6:
-
-1. Un-tar in your working directory. WinZip will unpack tar files.
-
-2. There should be a ZIP file, wthrmkr_vs6.zip. Unzip that in your
-   working directory, too. It contains the Visual Studio makefile
-   (weather.mak), dependencies file (weather.dep), project file
-   (weather.dsp), workspace file (weather.dsw), source files for my
-   homebrew versions of a few STANDARD C functions that Microsoft was
-   too lame to include (stupid_microsoft.cpp, stupid_microsoft.h), a
-   makefile for using Cygwin gcc to generate non-Cygwin exes 
-   (Makefile.nocygwin, not used by Visual Studio) and the GNU glibc 
-   source files for the getopt() and getopt_long() functions (getopt.h, 
-   getopt.c, getoptl.c), slightly hacked to compile under VS6.
-
-3. From your working directory, build wthrmkr.exe:
-   nmake /f weather.mak 
-
-   A release version will be created in <your directory>/Release/.
-   If you want the debug version (not optimized, has debugging symbols):
-   nmake /f weather.mak CFG="weather - Win32 Debug"
-
-   That will create wthrmkr.exe in <your directory>/Debug/.
-
-   The workspace and project files are only needed if you want to hack
-   around with the program in Visual Studio.  If you're doing that,
-   you probably don't need me to tell you what to do with those
-   files. :-)
-
-4. Copy the resulting wthrmkr.exe executable somewhere convenient. I
-   tested it using Visual Studio 6.0, SP6 on Windows NT 4.0, SP6a.
-
-OS/2:
-
-You should be able to hack the makefile to compile under OS/2, because
-that's where this program started out in the first place. I don't have
-it available to test with anymore, so you're on your own.
+I am no longer supporting non-standard C++ compilers.
 
 ----------------------
 INSTALLING EXECUTABLES
@@ -126,7 +57,7 @@ INSTALLING EXECUTABLES
 Windows:
 
 1. Download archive of latest Windows executables from my website or
-other archive. Currently that is wthrmkr134-win32.zip.
+other archive. Currently there isn't one, yet.
 
 2. Unzip the archive; it should contain three files: wthrmkr.exe,
 CHANGES.txt, and README.txt.
@@ -150,63 +81,63 @@ wthrmkr -h
 --clime <climate>
 -t <terrain>
 --terrain <terrain>
-	climate = A [arctic]         terrain = D [desert]
-	          SA [subarctic]               F [forest]
-	          T [temperate]                H [hills]
-	          ST [subtropical]             M [mountains]
-	          TR [tropical]                P [plains]
-	                                       S [seacoast]
+        climate = A [arctic]         terrain = D [desert]
+                  SA [subarctic]               F [forest]
+                  T [temperate]                H [hills]
+                  ST [subtropical]             M [mountains]
+                  TR [tropical]                P [plains]
+                                               S [seacoast]
 
 -d <day>
 --day <day>
-	day = 1-31 [day of the month]
+        day = 1-31 [day of the month]
 
 -m <month>
 --month <month>
-	month = 1-12 [month of year]
+        month = 1-12 [month of year]
 
 -n <#days>
 --number-days <#days>
-	#days = 1-9999 [# of days to report weather for]
+        #days = 1-9999 [# of days to report weather for]
 
 -e <elevation>
 --elevation <elevation>
-	elevation = 0-30000 [elevation in feet]
+        elevation = 0-30000 [elevation in feet]
 
 <year>
-	year = year according to campaign calendar
+        year = year according to campaign calendar
 
 -f <file>
 --prev-weather-file <file>
-	file = weather file with STATUS line (overrides cmd-line args)
+        file = weather file with STATUS line (overrides cmd-line args)
 
 -C
 --metric
-	Display temperatures in Celsius and depths/speeds in metric
+        Display temperatures in Celsius and depths/speeds in metric
 
 -L
 --show-moon
-	Show current phase of the moon
+        Show current phase of the moon
 
 -v
 --verbose
-	Use verbose format
+        Use verbose format
 
 -F
 --forgotten-realms
-	Use Forgotten Realms calendar
+        Use Forgotten Realms calendar
 
 -G
 --greyhawk
-	Use Greyhawk calendar
+        Use Greyhawk calendar
 
 -V
 --version
-	Show version, license, and exit
+        Show version, license, and exit
 
 -h
 --help
-	Show this help and exit
+        Show this help and exit
 
 The basic idea:
 
@@ -233,9 +164,9 @@ STATUS 2 4 0 1359 0 4 500 5 20 10 0.000000 0 0 0 S
 
 Example of verbose output:
 --------------------------- Outdoors -------------------------------------
-	Climate: Temperate		Terrain: Plains
-	Year 1359, Hammer 1 to Year 1359, Hammer 3
-	Elevation: 500		Season: Winter
+        Climate: Temperate              Terrain: Plains
+        Year 1359, Hammer 1 to Year 1359, Hammer 3
+        Elevation: 500          Season: Winter
 --------------------------------------------------------------------------
 Year 1359, Hammer 1 :
 high: 25 F low: 10 F with a 15 mph wind out of the W. 
@@ -291,11 +222,12 @@ and -G) for that, too.
 Please report bugs to cyhiggin@republicofnewhome.org
 
 Finally, if you like WeatherMaker, but wish it did things a bit
-differently, you have two options: (1) send me e-mail explaining what
-changes you would like made and why they are a good idea, or (2) make
-the changes yourself. Please read the GNU General Public License
-included in the file COPYING to find out your responsibilities if you
-should decide to distribute your changed version, however.
+differently, you have two options: (1) open an issue on GitHub
+explaining what changes you would like made and why they are a good idea, 
+(2) make the changes yourself, (3) or email me as per (1). 
+Please read the GNU General Public License included in the file COPYING to find
+out your responsibilities if you should decide to distribute your changed
+version, however.
 
 WeatherMaker is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
