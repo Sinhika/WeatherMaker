@@ -30,8 +30,8 @@ SRCS := $(OBJS:.o=.cpp) calendar.h dailyreport.h intermediatereport.h  \
 	macros.h outdoors.h tables.h wthrmkr.h
 
 CXX := g++
-CXXFLAGS = -m64 -ggdb -std=gnu++98 -fno-strict-aliasing -Wall -Wextra
-#CXXFLAGS = -Wall -O2
+CXXFLAGS = -m64 -ggdb -O2 -std=gnu++98 -fno-strict-aliasing \
+	   -Wall -Wextra -Wno-implicit-fallthrough -Wno-unused-parameter
 
 INCLUDE := -I.
 
@@ -41,7 +41,6 @@ all:	wthrmkr
 
 wthrmkr: $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LIBS)
-	#strip wthrmkr
 
 # generate dependency files & compile all in one step
 df = $(DEPDIR)/$(*F)
@@ -54,8 +53,10 @@ df = $(DEPDIR)/$(*F)
 
 -include $(OBJS:%.o=$(DEPDIR)/%.P)
 
-.PHONY: clean
+.PHONY: clean ctags
 
 clean:
-	rm -f $(OBJS) wthrmkr *~ *.bak $(DEPDIR)/*.P
+	rm -f $(OBJS) wthrmkr *~ *.bak $(DEPDIR)/*.P tags
 
+ctags:
+	ctags *.cpp *.h
