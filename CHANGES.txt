@@ -1,0 +1,113 @@
+$Id: CHANGES.txt,v 1.8 2002/05/18 17:22:28 cyhiggin Exp $
+
+v. 1.3.4:
+-- Added a makefile (Makefile.nocygwin) to use Cygwin port of gcc
+   to compile an executable that does not require cygwin1.dll, but
+   uses standard Windows DLLs instead. (Needed for Windows version 
+   of distributed executable).
+-- created a Windows binary archive, wthrmkr134-win32.zip
+
+v. 1.3.3:
+-- Used gcc -MM to create dependency files instead of makedep. Now you
+   don't need to have X windows installed to create dependency
+   files. Thanks to the author of 'fastdep' for pointing out the
+   existance of this gcc option.
+
+v. 1.3.2:
+-- Added lunar phases option
+-- made new lunar phases option compilable under Windows VS.
+
+v. 1.3.1:
+-- Added Greyhawk calendar option.
+-- provided  long versions of command-line arguments.  
+
+v. 1.3.0:
+-- Made calendar object that calculates season, month, printed date
+   string correctly for Earth.  
+-- Re-implemented Forgotten Realms calendar option.
+-- Fixed headers to compile under Windows. Created Visual Studio
+   makefile weather.mak. Zipped up Windows Visual Studio-specific
+   files in wthrmkr_vs6.zip.
+
+-- Added calendar configuration code to STATUS line. Breaks v 1.2.1
+   and older status lines. New format STATUS line:
+
+  printf("STATUS %hd %hd %hd %hd %hd %hd %ld %hd %hd %hd %f %hd %hd %hd %s\n", 
+	 (short) pOutdoor->clime, (short) pOutdoor->terrain,
+	 (short) pOutdoor->calendar_cfg, pOutdoor->year[0],
+	 pOutdoor->month[0], pOutdoor->day[0], pOutdoor->elevation,
+	 temperature_step, ground_temperature, 
+	 wind_speed, (double) accumulation, 
+	 is_special, duration_special, special_step,
+	 p_prevailing_list);
+
+v. 1.2.1:
+-- added option to display temperatures in degrees Celsius option,
+   other stuff in metric
+-- made terse mode terser.
+-- added F/C (Farenheit/Celsius) to temperature print out.
+-- added mandatory year argument and made month optional. Breaks
+   old-format STATUS lines. New format STATUS line:
+  printf("STATUS %hd %hd %hd %hd %hd %ld %hd %hd %hd %f %hd %hd %hd %s\n", 
+	 (short) pOutdoor->clime, (short) pOutdoor->terrain,
+	 pOutdoor->year[0],
+	 pOutdoor->month[0], pOutdoor->day[0], pOutdoor->elevation,
+	 temperature_step, ground_temperature, 
+	 wind_speed, (double) accumulation, 
+	 is_special, duration_special, special_step,
+	 p_prevailing_list);
+
+v. 1.2.0:
+-- implemented hurricane special
+-- added GNU copyright & licensing stuff
+-- implemented drought special
+-- changed ground_temperature algorithm to use daily temperature instead of
+   code temperature, as specials can change temperature. Also moved calculation
+   after special processing, so specials like heat waves/cold waves can affect
+   snow melt.
+-- implemented extreme precipitation special
+-- implemented extreme precip: thunderstorm special
+-- moved "to do" list to TODO.txt
+-- implemented extreme precip: hailstorm special
+-- implemented extreme precip: icestorm special
+-- implemented extreme precip: blizzard special
+-- implemented tornado special
+-- implemented fog special
+-- implemented sandstorm/blowing snow special; revised gale special
+
+v. 1.1.2:
+-- broke up describe_special() into one subroutine per case in switch.
+
+v. 1.1.1:
+-- Add version label
+
+Unlabeled v. 1.1.0:
+-- added ability to input previous weather starting conditions.
+   Need:
+	temperature step : 0 - 10 (short)
+	ground temperature ?? : short
+	current windspeed : short
+	accumulation : short
+	is_special : T/F (short)
+	special duration : 0-14 (short)
+	special step :  0-1, 0-10 (short,short)
+	current prevailing wind ? : (string)
+
+   Implemented status line as:
+
+    printf("STATUS %hd %hd %hd %hd %ld %hd %hd %hd %f %hd %hd %hd %s\n", 
+	 (short) pOutdoor->clime, (short) pOutdoor->terrain,
+	 pOutdoor->month[0], pOutdoor->day[0], pOutdoor->elevation,
+	 temperature_step, ground_temperature, 
+	 wind_speed, (double) accumulation, 
+	 is_special, duration_special, special_step,
+	 p_prevailing_list);
+
+    Example output/input:
+STATUS 2 4 8 15 500 12 53 45 0.000000 1 11 2 N
+
+Unlabeled v. 1.0.0:
+-- Basic temperature, wind, precipitation by climate, terrain & season implemented.
+-- implemented Cold Wave & Heat Wave specials
+-- implemented Gale special
+-- added Forgotten Realms month names option

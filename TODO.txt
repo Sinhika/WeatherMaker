@@ -1,0 +1,14 @@
+$Id: TODO.txt,v 1.7 2002/05/18 17:22:28 cyhiggin Exp $
+
+-- RPM of binaries.
+-- Add custom calendar option.
+-- Calculate sunrise, sunset and add to weather report.
+-- Calculate and report wind chill factor.
+-- make consistant with GNU coding standards.
+-- add a "make install" option to makefile
+-- use autoconf? (Windows compatibility?)
+-- Make pre-compiled binaries available? RPMs? Debian thingies?
+-- Palm OS version??
+-- Export to HTML-formatted option
+-- export to Palm pdb option?
+-- export to comma-delimited option?
