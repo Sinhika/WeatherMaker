@@ -23,24 +23,29 @@
 SHELL := /bin/bash
 DEPDIR := ./.deps
 
+PROGRAMNAME := wthrmkr.exe
+#PROGRAMNAME := wthrmkr
+
 OBJS := special.o wthrmkr.o outdoors.o \
 	intermediatereport.o dailyreport.o calendar.o lunar.o tables.o 
 
 SRCS := $(OBJS:.o=.cpp) calendar.h dailyreport.h intermediatereport.h  \
 	macros.h outdoors.h tables.h wthrmkr.h
 
-CXX := g++
+#CXX := g++
+CXX := x86_64-w64-mingw32-g++
 CXXFLAGS = -m64 -ggdb -O2 -std=gnu++98 -fno-strict-aliasing \
 	   -Wall -Wextra -Wno-implicit-fallthrough -Wno-unused-parameter
 
 INCLUDE := -I.
 
-LIBS =
+LD_FLAGS := -static
+LIBS :=
 
-all:	wthrmkr
+all:	$(PROGRAMNAME)
 
-wthrmkr: $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $@ $^ $(LIBS)
+$(PROGRAMNAME): $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LD_FLAGS) $(LIBS)
 
 # generate dependency files & compile all in one step
 df = $(DEPDIR)/$(*F)
@@ -56,7 +61,7 @@ df = $(DEPDIR)/$(*F)
 .PHONY: clean ctags
 
 clean:
-	rm -f $(OBJS) wthrmkr *~ *.bak $(DEPDIR)/*.P tags
+	rm -f $(OBJS) $(PROGRAMNAME) *~ *.bak $(DEPDIR)/*.P tags
 
 ctags:
 	ctags *.cpp *.h
