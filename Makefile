@@ -23,8 +23,8 @@
 SHELL := /bin/bash
 DEPDIR := ./.deps
 
-PROGRAMNAME := wthrmkr.exe
-#PROGRAMNAME := wthrmkr
+#PROGRAMNAME := wthrmkr.exe
+PROGRAMNAME := wthrmkr
 
 OBJS := special.o wthrmkr.o outdoors.o \
 	intermediatereport.o dailyreport.o calendar.o lunar.o tables.o 
@@ -32,14 +32,16 @@ OBJS := special.o wthrmkr.o outdoors.o \
 SRCS := $(OBJS:.o=.cpp) calendar.h dailyreport.h intermediatereport.h  \
 	macros.h outdoors.h tables.h wthrmkr.h
 
-#CXX := g++
-CXX := x86_64-w64-mingw32-g++
+CXX := g++
+#CXX := x86_64-w64-mingw32-g++
 CXXFLAGS = -m64 -ggdb -O2 -std=gnu++98 -fno-strict-aliasing \
 	   -Wall -Wextra -Wno-implicit-fallthrough -Wno-unused-parameter
 
 INCLUDE := -I.
 
-LD_FLAGS := -static
+LD_FLAGS := 
+#LD_FLAGS := -static
+
 LIBS :=
 
 all:	$(PROGRAMNAME)
