@@ -31,13 +31,15 @@ Linux/Unix:
 4. Build wthrmkr:
    make 
 
-5. Copy the resulting wthrmkr executable to wherever you want it, like
+5. Install the resulting wthrmkr executable to wherever you want it, like
    /usr/local/bin or /usr/games/bin.
 
 Currently, WeatherMaker should compile on any system with g++ and a
 working implementation of libc/glibc, including all the header files
-(it requires getopt.h). I have tested it on Linux 4.15 and earlier with glibc.
-It is single-threaded, so it should compile fine on older systems.
+(it requires getopt.h). I have tested it on Linux 4.15 and earlier,
+and I have successfully compiled it for Windows-64 using the mingw-64
+toolchain on WLS. It is single-threaded, so it should compile fine 
+on older systems.
 
 Windows/Cygwin:
 
@@ -48,24 +50,26 @@ I tested it using gcc 2.95.2-6 under Cygwin 19.1001.8.
 
 Windows/Cygwin-without-cygwin-DLL:
 
-I am no longer supporting non-standard C++ compilers.
+I have compiled and briefly tested this using the mingw-64 cross-compile
+toolchain under WLS Ubuntu (that's Windows-for-Linux Subsystem), with static
+linkage. Static linkage is necessary to include the DLLs, or it can't find
+them.
 
 ----------------------
 INSTALLING EXECUTABLES
 ----------------------
 
-Windows:
+Windows/Linux:
 
-1. Download archive of latest Windows executables from my website or
-other archive. Currently there isn't one, yet.
+1. Download the latest Windows or Linux release from my GitHub. 
+The source code archive includes the CHANGES.txt and
+README.txt files, which should also be on my website.
 
-2. Unzip the archive; it should contain three files: wthrmkr.exe,
-CHANGES.txt, and README.txt.
-
-3. Read CHANGES.txt to see what has changed lately. Usage instructions
+2. Read CHANGES.txt to see what has changed lately. Usage instructions
 are in this file, README.txt.
 
-4. Copy wthrmkr.exe somewhere convenient (in your path). Use.
+3. Copy wthrmkr.exe (Windows) or wthrmkr (Linux) somewhere convenient (in your
+path). Use.
 
 
 -----

@@ -4,7 +4,8 @@ v. 1.3.5:
 -- Updated to properly compile & link under GNU C++ 7.5. Cleaned up compiler
    warnings. Removed old Visual Studio support; if Microsoft doesn't support
    POSIX code after 20 years, stuff 'em; I am not maintaining it. Definitely
-   compiles under modern Linux. Put source code on GitHub.
+   compiles under modern Linux. Put source code on GitHub. Added options for
+   compiling under mingw-64 toolchain for Windows, which works.
 
 v. 1.3.4:
 -- Added a makefile (Makefile.nocygwin) to use Cygwin port of gcc
